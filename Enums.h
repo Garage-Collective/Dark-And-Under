@@ -10,12 +10,12 @@
 // ----------------------------------------------------------------------------------------------------------------------------------
 
 
-#define UP_BUTTON_MASK                    128
-#define DOWN_BUTTON_MASK                  16
-#define LEFT_BUTTON_MASK                  32
-#define RIGHT_BUTTON_MASK                 64
-#define A_BUTTON_MASK                     8
-#define B_BUTTON_MASK                     4
+#define UP_BUTTON_MASK                    UP_BUTTON
+#define DOWN_BUTTON_MASK                  DOWN_BUTTON
+#define LEFT_BUTTON_MASK                  LEFT_BUTTON
+#define RIGHT_BUTTON_MASK                 RIGHT_BUTTON
+#define A_BUTTON_MASK                     A_BUTTON
+#define B_BUTTON_MASK                     B_BUTTON
 
 #define SELECT_BUTTON_MASK                A_BUTTON_MASK
 #define BACK_BUTTON_MASK                  B_BUTTON_MASK
