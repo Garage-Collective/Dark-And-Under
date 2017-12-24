@@ -1,0 +1,74 @@
+{
+  "schemaVersion": 2,
+  "title": "Dark & Under",
+  "description": "Do you have what it takes to survive the depths of the Undermountain? Alone?  If so, then pack your gear, strap on your shield, explore labyrinthine corridors and battle unimaginable foes to steal the greedy Dragon's treasure.",
+  "author": "Garage Collective",
+  "version": "1.0.1",
+  "date": "2017-12-20",
+  "genre": "Action",
+  "publisher": "Garage Collective",
+  "idea": "Garage Collective",
+  "code": "Simon Holmes",
+  "art": "Cyril Guichard",
+  "url": "http://www.garage-collective.com/darkunder/",
+  "sourceUrl": "https://github.com/Garage-Collective/Dark-And-Under",
+  "email": "simon@bloggingadeadhorse.com",
+  "companion": "https://github.com/Garage-Collective/Dark-And-Under-Level-Editor",
+  "banner": "banner.png",
+  "buttons": [
+   { "control": "Up",
+     "action": "During Play: Move forward"},
+   { "control": "Left / Right",
+     "action": "During Play: Turn left or right"},
+   { "control": "Down",
+     "action": "During Play: About face"},
+   { "control": "A",
+     "action": "During Play: Display large map if configured"},     
+   { "control": "B",
+     "action": "During Play: Display inventory"},     
+   { "control": "Left / Right",
+     "action": "Inventory: Highlight item"},     
+   { "control": "A",
+     "action": "Inventory: Select item / action"},     
+   { "control": "B",
+     "action": "Inventory: Return to game play"}
+  ],     
+  "screenshots": [
+    {
+      "title": "Splash Screen",
+      "filename": "screenshot00.png"
+    },
+    {
+      "title": "Credits",
+      "filename": "screenshot01.png"
+    },
+    {
+      "title": "Under Attack!",
+      "filename": "screenshot02.png"
+    },
+    {
+      "title": "Under Attack!",
+      "filename": "screenshot08.png"
+    },
+    {
+      "title": "Manage Inventory",
+      "filename": "screenshot10.png"
+    },
+    {
+      "title": "The End",
+      "filename": "screenshot09.png"
+    }
+  ],
+  "binaries": [
+    {
+      "title": "Arduboy Version",
+      "filename": "Dark-And-Under.hex",
+      "device": "Arduboy"
+    }
+    {
+      "title": "Arduboy Devkit Version",
+      "filename": "Dark-And-Under-Devkit.hex",
+      "device": "Devkit"
+    }
+  ]
+}
