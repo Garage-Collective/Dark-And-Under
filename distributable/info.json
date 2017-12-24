@@ -13,7 +13,7 @@
   "url": "http://www.garage-collective.com/darkunder/",
   "sourceUrl": "https://github.com/Garage-Collective/Dark-And-Under",
   "email": "simon@bloggingadeadhorse.com",
-  "companion": "",
+  "companion": "https://github.com/Garage-Collective/Dark-And-Under-Level-Editor",
   "banner": "banner.png",
   "buttons": [
    { "control": "Up",
