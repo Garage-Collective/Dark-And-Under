@@ -715,6 +715,8 @@ void drawMapAndStatistics(Player *player, Level *myLevel) {
           x = 10; y = 16;
           break;
 
+        default: break;
+
       }
 
     }
@@ -737,6 +739,8 @@ void drawMapAndStatistics(Player *player, Level *myLevel) {
         case Direction::West:
           x = 55; y = 26;
           break;
+
+        default: break;
 
       }
 
@@ -770,6 +774,8 @@ void drawMapAndStatistics(Player *player, Level *myLevel) {
       case Direction::West:
         x = 10; y = 16;
         break;
+
+      default: break;
 
     }
 
