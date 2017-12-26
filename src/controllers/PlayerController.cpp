@@ -10,18 +10,35 @@ PlayerController::PlayerController() : BaseController() {}
     
 bool PlayerController::move(Player *player, Enemy *allEnemies, Level *level, Button button) {
 
-  if (button == Button::Up) {
+  if ((button == Button::Up) || (button == Button::Down)) {
 
     int8_t deltaX = 0;
     int8_t deltaY = 0;
     
-    switch (player->getDirection()) {
+    if (button == Button::Up) {
+  
+      switch (player->getDirection()) {
+        
+        case Direction::North:      deltaY = -1;    break;
+        case Direction::East:       deltaX = 1;     break;
+        case Direction::South:      deltaY = 1;     break;
+        case Direction::West:       deltaX = -1;    break;
+        
+      }
+
+    }
+
+    if (button == Button::Down) {
       
-      case Direction::North:      deltaY = -1;    break;
-      case Direction::East:       deltaX = 1;     break;
-      case Direction::South:      deltaY = 1;     break;
-      case Direction::West:       deltaX = -1;    break;
-      
+      switch (player->getDirection()) {
+        
+        case Direction::North:      deltaY = 1;     break;
+        case Direction::East:       deltaX = -1;    break;
+        case Direction::South:      deltaY = -1;    break;
+        case Direction::West:       deltaX = 1;     break;
+        
+      }
+
     }
 
     if (PlayerController::moveLegal(allEnemies, player, level, player->getX() + deltaX, player->getY() + deltaY))    { 
@@ -31,7 +48,7 @@ bool PlayerController::move(Player *player, Enemy *allEnemies, Level *level, But
       return true; 
     
     };
-    
+
   }
   else {
 
@@ -39,7 +56,6 @@ bool PlayerController::move(Player *player, Enemy *allEnemies, Level *level, But
 
     switch (button) {
 
-      case Button::Down:   ++curDirection; ++curDirection;      break;
       case Button::Left:   --curDirection;                      break;
       case Button::Right:  ++curDirection;                      break;
       default:                                                  break;

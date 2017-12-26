@@ -22,7 +22,7 @@ uint16_t playLoop() {
   uint8_t buttons = arduboy.justPressedButtons();
 
   if (buttons & UP_BUTTON_MASK)            { playerMoved = PlayerController::move(&myHero, enemies, &myLevel, Button::Up); }
-  else if (buttons & DOWN_BUTTON_MASK)     { PlayerController::move(&myHero, enemies, &myLevel, Button::Down); }
+  else if (buttons & DOWN_BUTTON_MASK)     { playerMoved = PlayerController::move(&myHero, enemies, &myLevel, Button::Down); }
   else if (buttons & LEFT_BUTTON_MASK)     { PlayerController::move(&myHero, enemies, &myLevel, Button::Left); }
   else if (buttons & RIGHT_BUTTON_MASK)    { PlayerController::move(&myHero, enemies, &myLevel, Button::Right); }
 
