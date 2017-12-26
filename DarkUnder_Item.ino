@@ -22,7 +22,7 @@ uint16_t itemLoop() {
 
     Sprites::drawOverwrite(71, 45, inv_hand, 0);
     Sprites::drawOverwrite(83, 45, inv_trash, 0);
-    arduboy.drawLine(66, 43, 66, 59);
+    arduboy.drawFastVLine(66, 43, 16);
 
     uint8_t buttons = arduboy.justPressedButtons();
 

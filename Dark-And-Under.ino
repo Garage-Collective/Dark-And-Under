@@ -184,6 +184,28 @@ void loop() {
 
 
 /* -----------------------------------------------------------------------------------------------------------------------------
+ *  Draw the outside frame ..
+ * -----------------------------------------------------------------------------------------------------------------------------
+ */
+void drawFrames() {
+
+  Sprites::drawOverwrite(0, 0, frameTopLH, 0);
+  Sprites::drawOverwrite(120, 0, frameTopRH, 0);
+  Sprites::drawOverwrite(0, 56, frameBotLH, 0);
+  Sprites::drawOverwrite(120, 56, frameBotRH, 0);
+  arduboy.drawFastHLine(8, 0, 112);
+  arduboy.drawFastHLine(8, 2, 112);
+  arduboy.drawFastHLine(8, 61, 112);
+  arduboy.drawFastHLine(8, 63, 112);
+  arduboy.drawFastVLine(0, 8, 48);
+  arduboy.drawFastVLine(2, 8, 48);
+  arduboy.drawFastVLine(125, 8, 48);
+  arduboy.drawFastVLine(127, 8, 48);
+
+}
+
+
+/* -----------------------------------------------------------------------------------------------------------------------------
  *  Level Up Handler
  *
  *  Display the 'Level Up' graphic and award a point.
@@ -192,7 +214,7 @@ void loop() {
  */
 uint16_t displayLevelUp() {
 
-  arduboy.drawCompressed(0, 0, frames_outside, WHITE);
+  drawFrames();
   arduboy.drawCompressed(66, 4, frames_inside, WHITE);
 
   #ifdef USE_LARGE_MAP
@@ -316,7 +338,7 @@ uint16_t displayLevelUp() {
  */
 void displayNextLevel() {
 
-  arduboy.drawCompressed(0, 0, frames_outside, WHITE);
+  drawFrames();
   arduboy.drawCompressed(64, 4, endOfLevel, WHITE);
 
   font3x5.setHeight(7);
@@ -343,7 +365,7 @@ void displayNextLevel() {
  */
 void displayEndOfGame(bool playerDead) {
 
-  arduboy.drawCompressed(0, 0, frames_outside, WHITE);
+  drawFrames();
 
   if (playerDead) {
 

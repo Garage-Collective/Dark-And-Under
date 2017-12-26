@@ -7,7 +7,7 @@
  */
 void displayLargeMap() {
 
-  arduboy.drawCompressed(0, 0, frames_outside, WHITE);
+  drawFrames();
   drawMapAndStatistics(&myHero, &myLevel, false);
   uint8_t buttons = arduboy.justPressedButtons();
 
