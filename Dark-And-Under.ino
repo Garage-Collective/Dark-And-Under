@@ -30,8 +30,6 @@ const uint8_t *map_images[] = { visionBack, closeWallFront, closeGateLocked, clo
                                 midWallFront, midDoorLocked, midDoorLevelLocked, midDoorLevelUnlocked, midWallLeft, midWallRight, midGateLeft, midGateRight,
                                 farGateLocked, farDoorLocked, farDoorUnlocked, farWallLeft, farWallRight };
 
-const uint8_t *direction_images[] = { directionN, directionE, directionS, directionW };
-
 
 // Inventory settings ..
 
