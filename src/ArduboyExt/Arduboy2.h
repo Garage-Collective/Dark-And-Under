@@ -164,7 +164,7 @@ class Arduboy2Base : public Arduboy2Core
  public:
   Arduboy2Base();
 
-  uint8_t justPressedButtons() const;
+  
 
   /** \brief
    * An object created to provide audio control functions within this class.
@@ -177,6 +177,8 @@ class Arduboy2Base : public Arduboy2Core
    */
   Arduboy2Audio audio;
 
+
+  
   /** \brief
    * Initialize the hardware, display the boot logo, provide boot utilities, etc.
    *
@@ -872,6 +874,7 @@ class Arduboy2Base : public Arduboy2Core
    * \see pollButtons() justReleased()
    */
   bool justPressed(uint8_t button);
+  uint8_t justPressedButtons();
 
   /** \brief
    * Check if a button has just been released.

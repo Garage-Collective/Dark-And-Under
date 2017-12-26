@@ -28,11 +28,6 @@ Arduboy2Base::Arduboy2Base()
   // lastFrameDurationMs
 }
 
-uint8_t Arduboy2Base::justPressedButtons() const {
-
-  return (~previousButtonState & currentButtonState);
-
-}
 
 // functions called here should be public so users can create their
 // own init functions if they need different behavior than `begin`
@@ -1022,6 +1017,12 @@ bool Arduboy2Base::justPressed(uint8_t button)
 bool Arduboy2Base::justReleased(uint8_t button)
 {
   return ((previousButtonState & button) && !(currentButtonState & button));
+}
+
+uint8_t Arduboy2Base::justPressedButtons() {
+
+  return (~previousButtonState & currentButtonState);
+
 }
 
 bool Arduboy2Base::collide(Point point, Rect rect)
