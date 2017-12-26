@@ -10,20 +10,23 @@ class Level {
   public:
 
     Level();
-    MapElement getMapElement(uint8_t x, uint8_t y, bool returnInactive);
+    MapElement getMapElement(uint8_t x, uint8_t y, bool returnInactive) const;
 
-    uint32_t getStartPos();
-    uint8_t getWidth();
-    uint8_t getHeight();
+    uint32_t getStartPos() const;
+    uint8_t getWidth() const;
+    uint8_t getHeight() const;
 
-    const Item * getDoors();
-    const uint8_t * getLevel();
-    const uint8_t * const * getMapTiles();
+    Item * getDoors();
+    const Item * getDoors() const;
+    const uint8_t * getLevel() const;
+    const uint8_t * const * getMapTiles() const;
 
     char * getTitleLine1();
+    const char * getTitleLine1() const;
     char * getTitleLine2();
+    const char * getTitleLine2() const;
     
-    void setDoors(const Item *value);
+    void setDoors(Item *value);
     void setStartPos(const uint32_t value);
     void setWidth(const uint8_t value);
     void setHeight(const uint8_t value);
@@ -40,8 +43,8 @@ class Level {
     char _titleLine1[12];
     char _titleLine2[12];
     
+    Item * _doors;
     const uint8_t * _level;
     const uint8_t * const * _map_tiles;
-    const Item * _doors;
 
 };

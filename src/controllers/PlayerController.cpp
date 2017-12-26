@@ -23,6 +23,7 @@ bool PlayerController::move(Player *player, Enemy *allEnemies, Level *level, But
         case Direction::East:       deltaX = 1;     break;
         case Direction::South:      deltaY = 1;     break;
         case Direction::West:       deltaX = -1;    break;
+        default: break;
         
       }
 
@@ -36,6 +37,7 @@ bool PlayerController::move(Player *player, Enemy *allEnemies, Level *level, But
         case Direction::East:       deltaX = -1;    break;
         case Direction::South:      deltaY = -1;    break;
         case Direction::West:       deltaX = 1;     break;
+        default: break;
         
       }
 
