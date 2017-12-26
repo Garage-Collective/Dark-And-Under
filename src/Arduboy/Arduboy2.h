@@ -874,7 +874,7 @@ class Arduboy2Base : public Arduboy2Core
    * \see pollButtons() justReleased()
    */
   bool justPressed(uint8_t button);
-  uint8_t justPressedButtons();
+//  uint8_t justPressedButtons();
 
   /** \brief
    * Check if a button has just been released.

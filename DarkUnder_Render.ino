@@ -1,4 +1,4 @@
-#include "src/ArduboyExt/Arduboy2.h"
+#include "src/Arduboy/Arduboy2.h"
 
 #define VISION_X_OFFSET   3
 #define VISION_Y_OFFSET   4

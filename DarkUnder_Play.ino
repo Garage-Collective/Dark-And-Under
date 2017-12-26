@@ -1,4 +1,4 @@
-#include "src/ArduboyExt/Arduboy2.h"
+#include "src/Arduboy/Arduboy2.h"
 #include "src/levels/MapData.h"
 
 /* -----------------------------------------------------------------------------------------------------------------------------

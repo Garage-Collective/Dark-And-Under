@@ -1,6 +1,6 @@
 #include <Arduino.h>
 #include <Print.h>
-#include "../ArduboyExt/Sprites.h"
+#include "../Arduboy/Sprites.h"
 #include "Font3x5.h"
 
 #define FONT3X5_WIDTH 3
