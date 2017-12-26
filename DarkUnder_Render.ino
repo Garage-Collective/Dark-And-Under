@@ -689,15 +689,92 @@ void drawMapAndStatistics(Player *player, Level *myLevel) {
   // Render player ..
 
   #ifdef USE_LARGE_MAP
-  if (smallMap) {
-    Sprites::drawExternalMask(mapXOffset + 10, mapYOffset + 15, playerMap, playerMap_Mask, 0, 0);
-  }
-  else {
-    Sprites::drawExternalMask(mapXOffset + 55, mapYOffset + 25, playerMap, playerMap_Mask, 0, 0);
+  {
+    uint8_t x = 0;
+    uint8_t y = 0;
+
+    if (smallMap) {
+
+      switch (player->getDirection()) {
+
+        case Direction::North:
+          x = 11; y = 15;
+          break;
+
+        case Direction::East:
+          x = 12; y = 16;
+          break;
+
+        case Direction::South:
+          x = 11; y = 17;
+          break;
+
+        case Direction::West:
+          x = 10; y = 16;
+          break;
+
+      }
+
+    }
+    else {
+
+      switch (player->getDirection()) {
+
+        case Direction::North:
+          x = 56; y = 25;
+          break;
+
+        case Direction::East:
+          x = 57; y = 26;
+          break;
+
+        case Direction::South:
+          x = 56; y = 27;
+          break;
+
+        case Direction::West:
+          x = 55; y = 26;
+          break;
+
+      }
+
+    }
+
+    arduboy.drawFastHLine(mapXOffset + x, mapYOffset + y, 2, BLACK);
+    arduboy.drawFastHLine(mapXOffset + x, mapYOffset + y + 1, 2, BLACK);
+
   }
   #endif
   #ifndef USE_LARGE_MAP
-  Sprites::drawExternalMask(MAP_X_OFFSET + 10, MAP_Y_OFFSET + 15, playerMap, playerMap_Mask, 0, 0);
+
+  { 
+    uint8_t x = 0;
+    uint8_t y = 0;
+
+    switch (player->getDirection()) {
+
+      case Direction::North:
+        x = 11; y = 15;
+        break;
+
+      case Direction::East:
+        x = 12; y = 16;
+        break;
+
+      case Direction::South:
+        x = 11; y = 17;
+        break;
+
+      case Direction::West:
+        x = 10; y = 16;
+        break;
+
+    }
+
+    arduboy.drawFastHLine(MAP_X_OFFSET + x, MAP_Y_OFFSET + y, 2, BLACK);
+    arduboy.drawFastHLine(MAP_X_OFFSET + x, MAP_Y_OFFSET + y + 1, 2, BLACK);
+
+  }
   #endif
 
 
