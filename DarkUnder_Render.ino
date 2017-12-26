@@ -131,10 +131,8 @@ void drawPlayerVision(Player *myHero, Level *myLevel) {
 
   }
 
-
-  arduboy.drawCompressed(0, 0, frames_outside, WHITE);
+  drawFrames();
   arduboy.drawCompressed(66, 4, frames_inside, WHITE);
-//  arduboy.drawCompressed(VISION_X_OFFSET + 1, VISION_Y_OFFSET, map_images[MAP_IMAGE_BACK], WHITE);
   Sprites::drawOverwrite(VISION_X_OFFSET + 1, VISION_Y_OFFSET, map_images[MAP_IMAGE_BACK], 0);
 
 
@@ -650,19 +648,23 @@ void drawMapAndStatistics(Player *player, Level *myLevel) {
               case MapElement::LockedDoor:
               case MapElement::SelfLockingDoor:
                 #ifdef USE_LARGE_MAP
-                arduboy.drawLine(mapXOffset + (drawX * MAP_TILE_OFFSET) + 1, mapYOffset + (drawY * MAP_TILE_OFFSET) + 1, mapXOffset + (drawX * MAP_TILE_OFFSET) + 1, mapYOffset + (drawY * MAP_TILE_OFFSET) + 2, BLACK);
+//                arduboy.drawLine(mapXOffset + (drawX * MAP_TILE_OFFSET) + 1, mapYOffset + (drawY * MAP_TILE_OFFSET) + 1, mapXOffset + (drawX * MAP_TILE_OFFSET) + 1, mapYOffset + (drawY * MAP_TILE_OFFSET) + 2, BLACK);
+                arduboy.drawFastVLine(mapXOffset + (drawX * MAP_TILE_OFFSET) + 1, mapYOffset + (drawY * MAP_TILE_OFFSET) + 1, 2, BLACK);
                 #endif
                 #ifndef USE_LARGE_MAP
-                arduboy.drawLine(MAP_X_OFFSET + (drawX * MAP_TILE_OFFSET) + 1, MAP_Y_OFFSET + (drawY * MAP_TILE_OFFSET) + 1, MAP_X_OFFSET + (drawX * MAP_TILE_OFFSET) + 1, MAP_Y_OFFSET + (drawY * MAP_TILE_OFFSET) + 2, BLACK);
+//                arduboy.drawLine(MAP_X_OFFSET + (drawX * MAP_TILE_OFFSET) + 1, MAP_Y_OFFSET + (drawY * MAP_TILE_OFFSET) + 1, MAP_X_OFFSET + (drawX * MAP_TILE_OFFSET) + 1, MAP_Y_OFFSET + (drawY * MAP_TILE_OFFSET) + 2, BLACK);
+                arduboy.drawFastVLine(MAP_X_OFFSET + (drawX * MAP_TILE_OFFSET) + 1, MAP_Y_OFFSET + (drawY * MAP_TILE_OFFSET) + 1, 2, BLACK);
                 #endif
                 break;
 
               case MapElement::UnlockedDoor:
                 #ifdef USE_LARGE_MAP
-                arduboy.drawLine(mapXOffset + (drawX * MAP_TILE_OFFSET) + 2, mapYOffset + (drawY * MAP_TILE_OFFSET) + 1, mapXOffset + (drawX * MAP_TILE_OFFSET) + 2, mapYOffset + (drawY * MAP_TILE_OFFSET) + 2, BLACK);
+//                arduboy.drawLine(mapXOffset + (drawX * MAP_TILE_OFFSET) + 2, mapYOffset + (drawY * MAP_TILE_OFFSET) + 1, mapXOffset + (drawX * MAP_TILE_OFFSET) + 2, mapYOffset + (drawY * MAP_TILE_OFFSET) + 2, BLACK);
+                arduboy.drawFastVLine(mapXOffset + (drawX * MAP_TILE_OFFSET) + 2, mapYOffset + (drawY * MAP_TILE_OFFSET) + 1, 2, BLACK);
                 #endif
                 #ifndef USE_LARGE_MAP
-                arduboy.drawLine(MAP_X_OFFSET + (drawX * MAP_TILE_OFFSET) + 2, MAP_Y_OFFSET + (drawY * MAP_TILE_OFFSET) + 1, MAP_X_OFFSET + (drawX * MAP_TILE_OFFSET) + 2, MAP_Y_OFFSET + (drawY * MAP_TILE_OFFSET) + 2, BLACK);
+//                arduboy.drawLine(MAP_X_OFFSET + (drawX * MAP_TILE_OFFSET) + 2, MAP_Y_OFFSET + (drawY * MAP_TILE_OFFSET) + 1, MAP_X_OFFSET + (drawX * MAP_TILE_OFFSET) + 2, MAP_Y_OFFSET + (drawY * MAP_TILE_OFFSET) + 2, BLACK);
+                arduboy.drawFastVLine(MAP_X_OFFSET + (drawX * MAP_TILE_OFFSET) + 2, MAP_Y_OFFSET + (drawY * MAP_TILE_OFFSET) + 1, 2, BLACK);
                 #endif
                 break;
 
@@ -783,11 +785,11 @@ void drawMapAndStatistics(Player *player, Level *myLevel) {
   #ifdef USE_LARGE_MAP
   if (smallMap) {
   #endif
-  font3x5.setCursor(70, 8);
-  printStatistic(F("HP  "), player->getHitPoints());
-  printStatistic(F("\nAP  "), player->getAttackPower());
-  printStatistic(F("\nDF  "), player->getDefence());
-  printStatistic(F("\nXP  "), player->getExperiencePoints());
+    font3x5.setCursor(70, 8);
+    printStatistic(F("HP  "), player->getHitPoints());
+    printStatistic(F("\nAP  "), player->getAttackPower());
+    printStatistic(F("\nDF  "), player->getDefence());
+    printStatistic(F("\nXP  "), player->getExperiencePoints());
   #ifdef USE_LARGE_MAP
   }
   #endif
@@ -863,7 +865,7 @@ void drawEnemyHitPointsBar(uint8_t hitPoints, uint8_t hitPointsMax) {
  */
 void displaySplash() {
 
-  arduboy.drawCompressed(0, 0, frames_outside, WHITE);
+  drawFrames();
   arduboy.drawCompressed(8, 4, splash, WHITE);
 
   if (splashStatus == SplashButtons::Play) {
@@ -898,10 +900,10 @@ void displaySplash() {
  */
 void displayLogo() {
 
-  arduboy.drawCompressed(0, 0, frames_outside, WHITE);
-  arduboy.drawLine(42, 2, 68, 2, BLACK);
-  arduboy.drawLine(42, 61, 68, 61, BLACK);
+  drawFrames();
 
+  arduboy.drawFastHLine(42, 2, 26, BLACK);
+  arduboy.drawFastHLine(42, 61, 26, BLACK);
   arduboy.drawCompressed(42, 0, garCol, WHITE);
 
   font3x5.setCursor(8, 24);

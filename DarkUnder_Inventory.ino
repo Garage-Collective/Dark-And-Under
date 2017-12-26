@@ -17,7 +17,7 @@
  */
 uint16_t inventoryLoop() {
 
-  arduboy.drawCompressed(0, 0, frames_outside, WHITE);
+  drawFrames();
   arduboy.drawCompressed(66, 4, frames_inside, WHITE);
   arduboy.drawCompressed(4, 4, inv_background, WHITE);
   drawDirectionIndicator(&myHero);
