@@ -136,7 +136,7 @@ struct Point
  * Example:
  *
  * \code
- * #include "src/ArduboyExt/Arduboy2.h"
+ * #include <Arduboy2.h>
  *
  * Arduboy2 arduboy;
  *

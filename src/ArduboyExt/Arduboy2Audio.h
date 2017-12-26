@@ -29,7 +29,7 @@
  * Example:
  *
  * \code
- * #include "src/ArduboyExt/Arduboy2.h"
+ * #include <Arduboy2.h>
  *
  * Arduboy2 arduboy;
  *
@@ -53,7 +53,7 @@
  * like so:
  *
  * \code
- * #include "src/ArduboyExt/Arduboy2.h"
+ * #include <Arduboy2.h>
  * #include <ArduboyTones.h>
  *
  * Arduboy2 arduboy;
