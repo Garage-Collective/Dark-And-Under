@@ -1,5 +1,4 @@
- #include <Arduboy2.h>
-#include "src/utils/Arduboy2Ext.h"
+#include "src/ArduboyExt/Arduboy2.h"
 #include "Enums.h"
 #include "src/levels/Level.h"
 #include "images/Images.h"
@@ -14,7 +13,7 @@
 #include "src/utils/EnemyNames.h"
 
 
-Arduboy2Ext arduboy;
+Arduboy2 arduboy;
 Font3x5 font3x5 = Font3x5();
 
 Item items[NUMBER_OF_ITEMS];

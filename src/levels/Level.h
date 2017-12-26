@@ -1,6 +1,6 @@
 #pragma once
 
-#include <Arduboy2.h>
+#include "../ArduboyExt/Arduboy2.h"
 #include "../../Enums.h"
 #include "MapData.h"
 #include "../entities/Item.h"

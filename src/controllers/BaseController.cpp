@@ -1,5 +1,5 @@
 #include "EnemyController.h"
-#include <Arduboy2.h>
+#include "../ArduboyExt/Arduboy2.h"
 #include "../../Enums.h"
 #include "../levels/Level.h"
 #include "../entities/Player.h"
