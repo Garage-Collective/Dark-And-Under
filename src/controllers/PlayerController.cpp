@@ -10,7 +10,7 @@ PlayerController::PlayerController() : BaseController() {}
     
 bool PlayerController::move(Player *player, Enemy *allEnemies, Level *level, Button button) {
 
-  if (((uint8_t)button == (uint8_t)Button::Up) || ((uint8_t)button == (uint8_t)Button::Down)) {
+  if ((button == Button::Up) || (button == Button::Down)) {
 
     int8_t deltaX = 0;
     int8_t deltaY = 0;
