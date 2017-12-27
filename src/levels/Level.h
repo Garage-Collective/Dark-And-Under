@@ -19,7 +19,6 @@ class Level {
     Item * getDoors();
     const Item * getDoors() const;
     const uint8_t * getLevel() const;
-    const uint8_t * const * getMapTiles() const;
 
     char * getTitleLine1();
     const char * getTitleLine1() const;
