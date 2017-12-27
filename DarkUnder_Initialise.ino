@@ -6,6 +6,23 @@
  */
 void initialiseGame() {
 
+  #ifdef ALTERNATIVE_ENDING
+
+    if (ALTERNATIVE_ENDING_SEQ != 1) {
+
+      byte game = EEPROM.read(EEPROM_SEQ_START);
+      byte seq = EEPROM.read(EEPROM_SEQ_START + 1);
+
+      if (game != ALTERNATIVE_ENDING_PREFIX || seq != (ALTERNATIVE_ENDING_SEQ - 1)) {
+
+        gameState = GameState::InvalidSeq;
+        
+      }
+
+    }
+
+  #endif
+
   myHero.setHitPoints(START_HP);
   myHero.setDefence(START_DF);
   myHero.setAttackPower(START_AP);
