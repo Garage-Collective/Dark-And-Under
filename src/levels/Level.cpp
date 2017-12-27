@@ -52,7 +52,7 @@ MapElement Level::getMapElement(uint8_t x, uint8_t y, bool returnInactive) const
   // Otherwise, work it out from the map ..
   
   uint8_t tileNumber = pgm_read_byte(&_level[_startPos + (x / MAP_TILE_WIDTH) + ((y / MAP_TILE_HEIGHT) * _width)]);
-  const uint8_t *tile = tiles + (tileNumber * MAP_TILE_WIDTH * 2);
+  const uint8_t *tile = &tiles[tileNumber * MAP_TILE_WIDTH * 2];
   uint8_t mapElement = pgm_read_byte(&tile[(x % MAP_TILE_WIDTH) + (((y % MAP_TILE_HEIGHT) / 8) * MAP_TILE_PHYSICAL_WIDTH)]) & (1 << (y % MAP_TILE_HEIGHT % 8));
   
   return (mapElement > 0 ? MapElement::Wall : MapElement::Floor);
