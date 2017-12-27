@@ -104,6 +104,13 @@ void loop() {
 
   switch (gameState) {
 
+    #ifdef ALTERNATIVE_ENDING 
+      case GameState::InvalidSeq:
+      font3x5.setCursor(22, 22);
+      font3x5.print(F("LEVELS MUST BE PLAYED\n    IN SEQUENCE !"));
+      break;
+    #endif
+
     case GameState::InitGame:
       level = 0;
       gameState = GameState::InitLevel;
@@ -378,9 +385,19 @@ void displayEndOfGame(bool playerDead) {
   }
   else {
 
+  #ifndef ALTERNATIVE_ENDING 
     arduboy.drawCompressed(43, 4, victory, WHITE);
     font3x5.setCursor(9, 8);
     font3x5.print(F("WELL DONE!\nTHE RICHES\nUNDER THE\nMOUNTAIN\nARE YOURS\nNOW!"));
+  #endif
+
+  #ifdef ALTERNATIVE_ENDING 
+    arduboy.drawCompressed(ALTERNATE_ENDING_IMAGE_POS_X, ALTERNATE_ENDING_IMAGE_POS_Y, alternate_image, WHITE);
+    font3x5.setCursor(ALTERNATE_ENDING_TEXT_POS_X, ALTERNATE_ENDING_TEXT_POS_Y);
+    font3x5.print(FlashString(endingText));
+    EEPROM.update(EEPROM_SEQ_START, ALTERNATIVE_ENDING_PREFIX);
+    EEPROM.update(EEPROM_SEQ_START + 1, ALTERNATIVE_ENDING_SEQ);
+  #endif
 
   }
 

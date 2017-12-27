@@ -82,6 +82,8 @@
 #define ITEM_ACTION_USE                   0
 #define ITEM_ACTION_DROP                  1
 
+#define EEPROM_SEQ_START                  EEPROM_STORAGE_SPACE_START + 98
+
 enum class GameState : uint8_t {
   Splash,   
   About,
@@ -103,6 +105,9 @@ enum class GameState : uint8_t {
   LevelUp,
   NextLevel,
   EndOfGame,
+  #ifdef ALTERNATIVE_ENDING 
+  InvalidSeq,
+  #endif
   #ifdef USE_LARGE_MAP
   DisplayLargeMap
   #endif
