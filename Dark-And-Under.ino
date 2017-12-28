@@ -1,4 +1,3 @@
- #include <Arduboy2.h>
 #include "src/utils/Arduboy2Ext.h"
 #include "Enums.h"
 #include "src/levels/Level.h"
