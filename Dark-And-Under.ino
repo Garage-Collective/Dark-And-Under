@@ -186,22 +186,22 @@ void loop() {
 /* -----------------------------------------------------------------------------------------------------------------------------
  *  Draw the outside frame ..
  * -----------------------------------------------------------------------------------------------------------------------------
- */
+ */ 
+const uint8_t frameHLineLookup[] PROGMEM = { 0, 2, 61, 63 };
+const uint8_t frameVLineLookup[] PROGMEM = { 0, 2, 125, 127 };
+ 
 void drawFrames() {
 
   Sprites::drawOverwrite(0, 0, frameTopLH, 0);
   Sprites::drawOverwrite(120, 0, frameTopRH, 0);
   Sprites::drawOverwrite(0, 56, frameBotLH, 0);
   Sprites::drawOverwrite(120, 56, frameBotRH, 0);
-  arduboy.drawFastHLine(8, 0, 112);
-  arduboy.drawFastHLine(8, 2, 112);
-  arduboy.drawFastHLine(8, 61, 112);
-  arduboy.drawFastHLine(8, 63, 112);
-  arduboy.drawFastVLine(0, 8, 48);
-  arduboy.drawFastVLine(2, 8, 48);
-  arduboy.drawFastVLine(125, 8, 48);
-  arduboy.drawFastVLine(127, 8, 48);
-
+  
+  for(uint8_t i = 0; i < 4; ++i)
+  {
+	arduboy.drawFastHLine(8, pgm_read_byte(&frameHLineLookup[i]), 112);
+	arduboy.drawFastVLine(pgm_read_byte(&frameVLineLookup[i]), 8, 48);
+  }
 }
 
 
