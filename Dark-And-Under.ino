@@ -199,8 +199,8 @@ void drawFrames() {
   
   for(uint8_t i = 0; i < 4; ++i)
   {
-	arduboy.drawFastHLine(8, pgm_read_byte(&frameHLineLookup[i]), 112);
-	arduboy.drawFastVLine(pgm_read_byte(&frameVLineLookup[i]), 8, 48);
+    arduboy.drawFastHLine(8, pgm_read_byte(&frameHLineLookup[i]), 112);
+    arduboy.drawFastVLine(pgm_read_byte(&frameVLineLookup[i]), 8, 48);
   }
 }
 
