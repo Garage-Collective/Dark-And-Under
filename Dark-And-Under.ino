@@ -99,7 +99,6 @@ void loop() {
   if (!(arduboy.nextFrame())) return;
 
   arduboy.pollButtons();
-  arduboy.clear();
 
   switch (gameState) {
 
@@ -178,7 +177,7 @@ void loop() {
 
   }
 
-  arduboy.display();
+  arduboy.display(true);
   delay(delayLength);
 
 }
