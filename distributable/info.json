@@ -3,7 +3,7 @@
   "title": "Dark & Under",
   "description": "Do you have what it takes to survive the depths of the Undermountain? Alone?  If so, then pack your gear, strap on your shield, explore labyrinthine corridors and battle unimaginable foes to steal the greedy Dragon's treasure.",
   "author": "Garage Collective",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "date": "2017-12-20",
   "genre": "Action",
   "publisher": "Garage Collective",
@@ -43,20 +43,40 @@
       "filename": "screenshot01.png"
     },
     {
-      "title": "Under Attack!",
+      "title": "Rat",
       "filename": "screenshot02.png"
+    },
+    {
+      "title": "Slime",
+      "filename": "screenshot03.png"
+    },
+    {
+      "title": "HP Potion",
+      "filename": "screenshot04.png"
+    },
+    {
+      "title": "Slime 2",
+      "filename": "screenshot05.png"
+    },
+    {
+      "title": "Monster Defeated",
+      "filename": "screenshot06.png"
+    },
+    {
+      "title": "Rat2",
+      "filename": "screenshot07.png"
     },
     {
       "title": "Under Attack!",
       "filename": "screenshot08.png"
     },
     {
-      "title": "Manage Inventory",
-      "filename": "screenshot10.png"
+      "title": "Death",
+      "filename": "screenshot09.png"
     },
     {
-      "title": "The End",
-      "filename": "screenshot09.png"
+      "title": "Inventory",
+      "filename": "screenshot10.png"
     }
   ],
   "binaries": [
