@@ -49,7 +49,9 @@ uint16_t battleLoop() {
         myHero.setHitPoints(myHero.getHitPoints() > hpLoss ? myHero.getHitPoints() - hpLoss : 0);
         gameState = GameState::Battle_PlayerDecides;
 
-        if (myHero.getHitPoints() == 0)  gameState = GameState::Battle_PlayerDies;
+        gameState = (myHero.getHitPoints() > 0)
+        ? GameState::Battle_PlayerDecides
+        :  GameState::Battle_PlayerDies;
       }
 
       break;
@@ -169,6 +171,7 @@ uint16_t battleLoop() {
         font3x5.print(hpLoss);
         damageEnemy(attackingEnemyIdx, hpLoss);
 
+        // For some reason making this a ternary is more expensive here
         gameState = GameState::Battle_EnemyDies;
         if (enemies[attackingEnemyIdx].getEnabled()) { gameState = GameState::Battle_EnemyAttacks_Init; }
       }
@@ -197,8 +200,9 @@ uint16_t battleLoop() {
         myHero.setHitPoints(myHero.getHitPoints() - hpLoss);
         damageEnemy(attackingEnemyIdx, 1);
 
-        gameState = GameState::Battle_EnemyDies;
-        if (enemies[attackingEnemyIdx].getEnabled()) gameState = GameState::Battle_PlayerDecides;
+        gameState = (enemies[attackingEnemyIdx].getEnabled())
+        ? GameState::Battle_PlayerDecides
+        : GameState::Battle_EnemyDies;
       }
 
       break;
@@ -212,6 +216,7 @@ uint16_t battleLoop() {
         damageEnemy(attackingEnemyIdx, PLAYER_CASTS_SPELL);
         myHero.setInventory(myHero.getSlotNumber(ItemType::Scroll), ItemType::None);
 
+        // For some reason making this a ternary is more expensive here
         gameState = GameState::Battle_EnemyDies;
         if (enemies[attackingEnemyIdx].getEnabled()) gameState = GameState::Battle_EnemyAttacks_Init;
 
