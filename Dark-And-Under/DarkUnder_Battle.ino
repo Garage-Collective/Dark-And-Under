@@ -47,7 +47,6 @@ uint16_t battleLoop() {
         font3x5.setCursor(33, 26);
         font3x5.print(hpLoss);
         myHero.setHitPoints(myHero.getHitPoints() > hpLoss ? myHero.getHitPoints() - hpLoss : 0);
-        gameState = GameState::Battle_PlayerDecides;
 
         gameState = (myHero.getHitPoints() > 0)
         ? GameState::Battle_PlayerDecides
