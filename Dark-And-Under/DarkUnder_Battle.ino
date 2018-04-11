@@ -19,14 +19,13 @@
  */
 uint16_t battleLoop() {
 
-  uint16_t delayLength = FIGHT_DELAY;
-
   drawPlayerVision(&myHero, &myLevel);
   Sprites::drawSelfMasked(DIRECTION_X_OFFSET, DIRECTION_Y_OFFSET, fight_icon, 0);
 
   font3x5.setCursor(80,44);
 
-  switch (gameState) {
+  const GameState priorState = gameState;
+  switch (priorState) {
 
 
     case GameState::Battle_EnemyAttacks_Init:  // ----------------------------------------------------------------------------------------------------------------------------------
@@ -154,7 +153,6 @@ uint16_t battleLoop() {
 
       }
 
-      delayLength = 0;
       break;
 
 
@@ -224,7 +222,7 @@ uint16_t battleLoop() {
   }
 
   drawEnemyHitPointsBar(enemies[attackingEnemyIdx].getHitPoints(), enemies[attackingEnemyIdx].getHitPointsMax());
-  return delayLength;
+  return (priorState != GameState::Battle_PlayerDecides) ? FIGHT_DELAY : 0;
 
 }
 
