@@ -169,7 +169,7 @@ GameState battlePlayerDecides(void)
   }
 
   else if (buttons & BACK_BUTTON_MASK)  {
-    savedState = gameState;
+    savedState = GameState::Battle_PlayerDecides;
     return GameState::InventorySelect;
   }
   else if (buttons & SELECT_BUTTON_MASK)  {
