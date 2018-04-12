@@ -121,6 +121,14 @@ GameState battleEnemyDies(void)
   }
 }
 
+const uint8_t * const fight_actions[] PROGMEM =
+{
+  fight_actions_1,
+  fight_actions_2,
+  fight_actions_3,
+  fight_actions_4,
+};
+
 GameState battlePlayerDecides(void)
 {
   uint8_t buttons = arduboy.justPressedButtons();
@@ -131,10 +139,12 @@ GameState battlePlayerDecides(void)
   fightButtons[(uint8_t)FightButtons::Magic] = (myHero.getInventoryCount(ItemType::Scroll) > 0);
   fightButtons[(uint8_t)FightButtons::Potion] = (myHero.getInventoryCount(ItemType::Potion) > 0);
 
-  arduboy.drawCompressed(80, 44, fight_actions_1, WHITE);
-  arduboy.drawCompressed(91, 44, fight_actions_2, WHITE);
-  if (fightButtons[(uint8_t)FightButtons::Magic])    { arduboy.drawCompressed(102, 44, fight_actions_3, WHITE); }
-  if (fightButtons[(uint8_t)FightButtons::Potion])   { arduboy.drawCompressed(113, 44, fight_actions_4, WHITE); }
+  for(uint8_t i = 0; i < 4; ++i)
+  {
+    if(fightButtons[i])
+      arduboy.drawCompressed(80 + 11 * i, 44, pgm_read_word(&fight_actions[i]), WHITE);
+  }
+  
   Sprites::drawSelfMasked(81 + (((uint8_t)fightButton) * 11), 56, icnSelect, 0);
 
   if ((buttons & LEFT_BUTTON_MASK) && (uint8_t)fightButton > 0) {
