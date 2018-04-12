@@ -227,10 +227,13 @@ GameState battlePlayerDefends(void) {
   arduboy.drawCompressed(12, 15, fight_hero_shield_Mask, BLACK);
   arduboy.drawCompressed(12, 15, fight_hero_shield, WHITE);
 
-  uint8_t maxHP = enemies[attackingEnemyIdx].getAttackPower() - myHero.getDefence();
-  if (maxHP < 2) maxHP = 2;
-  if (maxHP > 10) maxHP = 10;
-  uint8_t hpLoss = random(0, maxHP);
+  const uint8_t enemyAttack = enemies[attackingEnemyIdx].getAttackPower();
+  const uint8_t playerDefence = myHero.getDefence();
+
+  uint8_t maxHP = (enemyAttack > playerDefence) ? (enemyAttack - playerDefence) : 2;
+  if(maxHP < 2) maxHP = 2;
+  if(maxHP > 10) maxHP = 10;
+  const uint8_t hpLoss = random(0, maxHP);
 
   font3x5.print(F("TAKE "));
   font3x5.print(hpLoss);
