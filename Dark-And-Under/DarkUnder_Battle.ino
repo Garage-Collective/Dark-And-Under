@@ -75,16 +75,16 @@ void damageEnemy(uint8_t attackingEnemyIdx, uint8_t hpLoss) {
 
 }
 
+GameState battleEnemyAttacksInit(void) {
 
-GameState battleEnemyAttacksInit(void)
-{
   font3x5.print(getEnemyName(enemies[attackingEnemyIdx].getEnemyType()));
   font3x5.print(F("\nATTACKS!"));
   return GameState::Battle_EnemyAttacks;
+  
 }
 
-GameState battleEnemyAttacks(void)
-{
+GameState battleEnemyAttacks(void) {
+
   arduboy.drawCompressed(12, 12, fight_scratch_Mask, BLACK);
   arduboy.drawCompressed(12, 12, fight_scratch, WHITE);
 
@@ -103,11 +103,10 @@ GameState battleEnemyAttacks(void)
 
 GameState battleEnemyDies(void)
 {
-  uint8_t xp = enemies[attackingEnemyIdx].getExperiencePoints();
-
   arduboy.drawCompressed(18, 14, enemy_defeated_Mask, BLACK);
   arduboy.drawCompressed(18, 14, enemy_defeated, WHITE);
 
+  uint8_t xp = enemies[attackingEnemyIdx].getExperiencePoints();
   font3x5.setCursor(32 + (xp < 10 ? 2 : 0), 26);
   font3x5.print(xp);
   myHero.setExperiencePoints(myHero.getExperiencePoints() + xp);
@@ -139,10 +138,11 @@ GameState battlePlayerDecides(void)
   fightButtons[(uint8_t)FightButtons::Magic] = (myHero.getInventoryCount(ItemType::Scroll) > 0);
   fightButtons[(uint8_t)FightButtons::Potion] = (myHero.getInventoryCount(ItemType::Potion) > 0);
 
-  for(uint8_t i = 0; i < 4; ++i)
-  {
+  for(uint8_t i = 0; i < 4; ++i) {
+
     if(fightButtons[i])
       arduboy.drawCompressed(80 + 11 * i, 44, pgm_read_word(&fight_actions[i]), WHITE);
+
   }
   
   Sprites::drawSelfMasked(81 + (((uint8_t)fightButton) * 11), 56, icnSelect, 0);
@@ -167,7 +167,6 @@ GameState battlePlayerDecides(void)
     }
 
   }
-
   else if (buttons & BACK_BUTTON_MASK)  {
     savedState = GameState::Battle_PlayerDecides;
     return GameState::InventorySelect;
@@ -187,44 +186,44 @@ GameState battlePlayerDecides(void)
         return GameState::Battle_PlayerCastsSpell;
 
       case (FightButtons::Potion):
+        fightButton = FightButtons::Attack;
         myHero.setHitPoints(myHero.getHitPoints() + INVENTORY_POTION_HP_INC);
         myHero.setInventory(myHero.getSlotNumber(ItemType::Potion), ItemType::None);
-        fightButton = FightButtons::Attack;
         break;
 
       default:
         break;
 
-          }
+    }
 
-        }
+  }
 
   return GameState::Battle_PlayerDecides;
 
 }
 
-GameState battlePlayerAttacks(void)
-{
+GameState battlePlayerAttacks(void) {
+
   arduboy.drawCompressed(19, 19, fight_hero_strike_Mask, BLACK);
   arduboy.drawCompressed(19, 19, fight_hero_strike, WHITE);
 
   uint8_t hpLoss = random(1, myHero.getAttackPower() + 1);
+  damageEnemy(attackingEnemyIdx, hpLoss);
+  
   font3x5.print(F("YOU DEAL\n"));
   font3x5.print(hpLoss);
   font3x5.print(F(" DAMAGE!\n"));
   font3x5.setCursor(32, 24);
   font3x5.print(hpLoss);
-  damageEnemy(attackingEnemyIdx, hpLoss);
 
-  // For some reason making this a ternary is more expensive here
-  if (enemies[attackingEnemyIdx].getEnabled())
-    return GameState::Battle_EnemyAttacks_Init;
-  else
-    return GameState::Battle_EnemyDies;
+  return (enemies[attackingEnemyIdx].getEnabled())
+  ? GameState::Battle_EnemyAttacks_Init
+  : GameState::Battle_EnemyDies;
+  
 }
 
-GameState battlePlayerDefends(void)
-{
+GameState battlePlayerDefends(void) {
+
   arduboy.drawCompressed(12, 15, fight_hero_shield_Mask, BLACK);
   arduboy.drawCompressed(12, 15, fight_hero_shield, WHITE);
 
@@ -246,18 +245,19 @@ GameState battlePlayerDefends(void)
   return (enemies[attackingEnemyIdx].getEnabled())
   ? GameState::Battle_PlayerDecides
   : GameState::Battle_EnemyDies;
+  
 }
 
-GameState battlePlayerCastsSpell(void)
-{
+GameState battlePlayerCastsSpell(void) {
+
   arduboy.drawCompressed(12, 15, fight_hero_spell_Mask, BLACK);
   arduboy.drawCompressed(12, 15, fight_hero_spell, WHITE);
 
   damageEnemy(attackingEnemyIdx, PLAYER_CASTS_SPELL);
   myHero.setInventory(myHero.getSlotNumber(ItemType::Scroll), ItemType::None);
 
-  if (enemies[attackingEnemyIdx].getEnabled())
-    return GameState::Battle_EnemyAttacks_Init;
-  else 
-    return GameState::Battle_EnemyDies;
+  return (enemies[attackingEnemyIdx].getEnabled())
+  ? GameState::Battle_EnemyAttacks_Init
+  : GameState::Battle_EnemyDies;
+  
 }
