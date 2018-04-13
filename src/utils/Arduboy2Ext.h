@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../Arduboy/Arduboy2.h"
+#include <Arduboy2.h>
 
 #define DEFAULT_VERT_SPACING 12
 

@@ -1,4 +1,4 @@
-#include "src/Arduboy/Arduboy2.h"
+#include <Arduboy2.h>
 
 /* -----------------------------------------------------------------------------------------------------------------------------
  *  Item loop.
@@ -20,8 +20,8 @@ uint16_t itemLoop() {
     drawPlayerVision(&myHero, &myLevel);
     arduboy.drawCompressed(72 + (itemAction == INVENTORY_ACTION_DROP ? 12 : 0), 56, inv_select, WHITE);
 
-    Sprites::drawOverwrite(71, 45, inv_hand, 0);
-    Sprites::drawOverwrite(83, 45, inv_trash, 0);
+    SpritesB::drawOverwrite(71, 45, inv_hand, 0);
+    SpritesB::drawOverwrite(83, 45, inv_trash, 0);
     arduboy.drawFastVLine(66, 43, 16);
 
     uint8_t buttons = arduboy.justPressedButtons();

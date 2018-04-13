@@ -99,7 +99,6 @@ void loop() {
   if (!(arduboy.nextFrame())) return;
 
   arduboy.pollButtons();
-  arduboy.clear();
 
   switch (gameState) {
 
@@ -178,7 +177,7 @@ void loop() {
 
   }
 
-  arduboy.display();
+  arduboy.display(true);
   delay(delayLength);
 
 }
@@ -187,22 +186,22 @@ void loop() {
 /* -----------------------------------------------------------------------------------------------------------------------------
  *  Draw the outside frame ..
  * -----------------------------------------------------------------------------------------------------------------------------
- */
+ */ 
+const uint8_t frameHLineLookup[] PROGMEM = { 0, 2, 61, 63 };
+const uint8_t frameVLineLookup[] PROGMEM = { 0, 2, 125, 127 };
+ 
 void drawFrames() {
 
-  Sprites::drawOverwrite(0, 0, frameTopLH, 0);
-  Sprites::drawOverwrite(120, 0, frameTopRH, 0);
-  Sprites::drawOverwrite(0, 56, frameBotLH, 0);
-  Sprites::drawOverwrite(120, 56, frameBotRH, 0);
-  arduboy.drawFastHLine(8, 0, 112);
-  arduboy.drawFastHLine(8, 2, 112);
-  arduboy.drawFastHLine(8, 61, 112);
-  arduboy.drawFastHLine(8, 63, 112);
-  arduboy.drawFastVLine(0, 8, 48);
-  arduboy.drawFastVLine(2, 8, 48);
-  arduboy.drawFastVLine(125, 8, 48);
-  arduboy.drawFastVLine(127, 8, 48);
-
+  SpritesB::drawOverwrite(0, 0, frameTopLH, 0);
+  SpritesB::drawOverwrite(120, 0, frameTopRH, 0);
+  SpritesB::drawOverwrite(0, 56, frameBotLH, 0);
+  SpritesB::drawOverwrite(120, 56, frameBotRH, 0);
+  
+  for(uint8_t i = 0; i < 4; ++i)
+  {
+    arduboy.drawFastHLine(8, pgm_read_byte(&frameHLineLookup[i]), 112);
+    arduboy.drawFastVLine(pgm_read_byte(&frameVLineLookup[i]), 8, 48);
+  }
 }
 
 
@@ -312,10 +311,10 @@ uint16_t displayLevelUp() {
     }
 
     if (levelUpButton == LevelUpButtons::AP) {
-      Sprites::drawSelfMasked(17, 43, hMarker, 0);
+      SpritesB::drawSelfMasked(17, 43, hMarker, 0);
     }
     else {
-      Sprites::drawSelfMasked(17, 51, hMarker, 0);
+      SpritesB::drawSelfMasked(17, 51, hMarker, 0);
     }
 
     if ((buttons & UP_BUTTON_MASK) && levelUpButton == LevelUpButtons::DF)             { levelUpButton = LevelUpButtons::AP; }
@@ -371,7 +370,7 @@ void displayEndOfGame(bool playerDead) {
   if (playerDead) {
 
     arduboy.drawCompressed(66, 4, frames_inside, WHITE);
-    Sprites::drawSelfMasked(DIRECTION_X_OFFSET, DIRECTION_Y_OFFSET, fight_icon, 0);
+    SpritesB::drawSelfMasked(DIRECTION_X_OFFSET, DIRECTION_Y_OFFSET, fight_icon, 0);
     #ifdef USE_LARGE_MAP
     drawMapAndStatistics(&myHero, &myLevel, true);
     #endif

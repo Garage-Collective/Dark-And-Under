@@ -1,4 +1,4 @@
-#include "src/Arduboy/Arduboy2.h"
+#include <Arduboy2.h>
 
 /* -----------------------------------------------------------------------------------------------------------------------------
  *  Inventory loop.
@@ -131,8 +131,8 @@ uint16_t inventoryLoop() {
     case GameState::InventoryAction:
 
       arduboy.drawCompressed(82 + (inventory_action == INVENTORY_ACTION_DROP ? 12 : 0), 56, inv_select, WHITE);
-      Sprites::drawOverwrite(81, 45, inv_hand, 0);
-      Sprites::drawOverwrite(93, 45, inv_trash, 0);
+      SpritesB::drawOverwrite(81, 45, inv_hand, 0);
+      SpritesB::drawOverwrite(93, 45, inv_trash, 0);
 
       if ((buttons & LEFT_BUTTON_MASK) && inventory_action > INVENTORY_ACTION_USE)            { --inventory_action; }
       else if ((buttons & RIGHT_BUTTON_MASK) && inventory_action < INVENTORY_ACTION_DROP)     { ++inventory_action; }
