@@ -141,6 +141,7 @@ uint16_t inventoryLoop() {
 
         if (inventory_action == INVENTORY_ACTION_USE) {
 
+		  bool success = false;
           switch (myHero.getInventory(inventory_selection)) {
 
             case ItemType::Key:
@@ -157,9 +158,7 @@ uint16_t inventoryLoop() {
                   if (doors[i].getItemType() == ItemType::LockedDoor)         doors[i].setItemType(ItemType::UnlockedDoor);
                   if (doors[i].getItemType() == ItemType::SelfLockingDoor)    doors[i].setEnabled(false);
                   
-                  myHero.setInventory(inventory_selection, ItemType::None);
-                  inventory_action = INVENTORY_ACTION_USE;
-                  gameState = GameState::InventorySelect;
+                  success = true;
 
                 }
 
@@ -168,14 +167,19 @@ uint16_t inventoryLoop() {
 
             case ItemType::Potion:
               myHero.setHitPoints(myHero.getHitPoints() + INVENTORY_POTION_HP_INC);
-              myHero.setInventory(inventory_selection, ItemType::None);
-              inventory_action = INVENTORY_ACTION_USE;
-              gameState = GameState::InventorySelect;
+			  success = true;
               break;
 
             default: break;
 
           }
+		  
+		  if(success)
+		  {
+              myHero.setInventory(inventory_selection, ItemType::None);
+              inventory_action = INVENTORY_ACTION_USE;
+              gameState = GameState::InventorySelect;		  
+		  }
 
         }
 
