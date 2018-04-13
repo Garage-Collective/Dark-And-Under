@@ -151,7 +151,7 @@ uint16_t inventoryLoop() {
                 int16_t deltaX = doors[i].getX() - myHero.getX();
                 int16_t deltaY = doors[i].getY() - myHero.getY();
 
-                if (doors[i].getEnabled() && (doors[i].getItemType() == ItemType::LockedDoor || doors[i].getItemType() == ItemType::LockedGate || doors[i].getItemType() == ItemType::SelfLockingDoor) &&
+                if (doors[i].getEnabled() && (doors[i].getItemType() != ItemType::UnlockedDoor) &&
                     absT(deltaX) <= 1 && absT(deltaY) <= 1) {
 
                   if (doors[i].getItemType() == ItemType::LockedGate)         doors[i].setEnabled(false);
