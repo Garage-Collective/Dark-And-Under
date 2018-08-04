@@ -137,8 +137,10 @@ GameState battlePlayerDecides(void)
   fightButtons[(uint8_t)FightButtons::Shield] = true;
   fightButtons[(uint8_t)FightButtons::Magic] = (myHero.getInventoryCount(ItemType::Scroll) > 0);
   fightButtons[(uint8_t)FightButtons::Potion] = (myHero.getInventoryCount(ItemType::Potion) > 0);
+  
+  constexpr uint8_t fightButtonsCount = sizeof(fightButtons) / sizeof(fightButtons[0]);
 
-  for(uint8_t i = 0; i < 4; ++i) {
+  for(uint8_t i = 0; i < fightButtonsCount; ++i) {
 
     if(fightButtons[i])
       arduboy.drawCompressed(80 + 11 * i, 44, pgm_read_word(&fight_actions[i]), WHITE);
@@ -149,7 +151,7 @@ GameState battlePlayerDecides(void)
 
   if ((buttons & LEFT_BUTTON_MASK) && (uint8_t)fightButton > 0) {
 
-    for (uint8_t i = (uint8_t)fightButton - 1; i >= 0; --i) {
+    for (uint8_t i = (uint8_t)fightButton - 1; i < fightButtonsCount; --i) {
       if (fightButtons[i]) {
         fightButton = (FightButtons)i;
         break;
