@@ -1,6 +1,5 @@
 #pragma once
 
-#include <Arduino.h>
 #include <Print.h>
 
 class Font3x5 : public Print {

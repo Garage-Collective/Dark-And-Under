@@ -1,12 +1,10 @@
 #pragma once
 
-#include "../Arduboy/Arduboy2.h"
 #include "../../Enums.h"
-#include "../levels/Level.h"
-#include "../entities/Player.h"
-#include "../entities/Enemy.h"
-#include "../entities/Item.h"
-#include "../levels/MapData.h"
+
+class Enemy;
+class Player;
+class Level;
 
 class BaseController {
 
@@ -14,6 +12,6 @@ class BaseController {
 
     BaseController();
 
-    static boolean moveLegal(Enemy *allEnemies, Player *player, Level *level, uint16_t x, uint16_t y);
+    static bool moveLegal(Enemy *allEnemies, Player *player, Level *level, uint16_t x, uint16_t y);
 
 };

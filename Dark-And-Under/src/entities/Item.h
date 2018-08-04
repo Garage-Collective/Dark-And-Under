@@ -1,6 +1,5 @@
 #pragma once
 
-#include "../Arduboy/Arduboy2.h"
 #include "Base.h"
 #include "../../Enums.h"
 

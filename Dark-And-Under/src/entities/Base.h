@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../Arduboy/Arduboy2.h"
+#include <stdint.h>
 
 class Base {
 
