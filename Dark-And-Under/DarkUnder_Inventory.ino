@@ -141,6 +141,7 @@ uint16_t inventoryLoop() {
 
         if (inventory_action == INVENTORY_ACTION_USE) {
 
+          bool success = false;
           switch (myHero.getInventory(inventory_selection)) {
 
             case ItemType::Key:
@@ -150,16 +151,14 @@ uint16_t inventoryLoop() {
                 int16_t deltaX = doors[i].getX() - myHero.getX();
                 int16_t deltaY = doors[i].getY() - myHero.getY();
 
-                if (doors[i].getEnabled() && (doors[i].getItemType() == ItemType::LockedDoor || doors[i].getItemType() == ItemType::LockedGate || doors[i].getItemType() == ItemType::SelfLockingDoor) &&
+                if (doors[i].getEnabled() && (doors[i].getItemType() != ItemType::UnlockedDoor) &&
                     absT(deltaX) <= 1 && absT(deltaY) <= 1) {
 
                   if (doors[i].getItemType() == ItemType::LockedGate)         doors[i].setEnabled(false);
                   if (doors[i].getItemType() == ItemType::LockedDoor)         doors[i].setItemType(ItemType::UnlockedDoor);
                   if (doors[i].getItemType() == ItemType::SelfLockingDoor)    doors[i].setEnabled(false);
                   
-                  myHero.setInventory(inventory_selection, ItemType::None);
-                  inventory_action = INVENTORY_ACTION_USE;
-                  gameState = GameState::InventorySelect;
+                  success = true;
 
                 }
 
@@ -168,20 +167,24 @@ uint16_t inventoryLoop() {
 
             case ItemType::Potion:
               myHero.setHitPoints(myHero.getHitPoints() + INVENTORY_POTION_HP_INC);
-              myHero.setInventory(inventory_selection, ItemType::None);
-              inventory_action = INVENTORY_ACTION_USE;
-              gameState = GameState::InventorySelect;
+              success = true;
               break;
 
             default: break;
 
+          }
+          
+          if(success)
+          {
+              myHero.setInventory(inventory_selection, ItemType::None);
+              inventory_action = INVENTORY_ACTION_USE;
+              gameState = GameState::InventorySelect;
           }
 
         }
 
         if (inventory_action == INVENTORY_ACTION_DROP) {
 
-          bool spaceOccupied = false;
           uint8_t itemIndex = 0;
 
           for (uint8_t i = 0; i < NUMBER_OF_ITEMS; ++i) {
@@ -192,8 +195,9 @@ uint16_t inventoryLoop() {
 
               if (item.getX() == myHero.getX() && item.getY() == myHero.getY()) {
 
-                spaceOccupied = true;
-                break;
+                font3x5.setCursor(95, 44);
+                font3x5.print(F("SPACE\nOCCUPIED!"));
+                return ITEM_DELAY;
 
               }
 
@@ -205,26 +209,16 @@ uint16_t inventoryLoop() {
             }
 
           }
+          
+          items[itemIndex].setEnabled(true);
+          items[itemIndex].setItemType(myHero.getInventory(inventory_selection));
+          items[itemIndex].setX(myHero.getX());
+          items[itemIndex].setY(myHero.getY());
 
-          if (spaceOccupied) {
-
-            font3x5.setCursor(95, 44);
-            font3x5.print(F("SPACE\nOCCUPIED!"));
-            return ITEM_DELAY;
-
-          }
-          else {
-
-            items[itemIndex].setEnabled(true);
-            items[itemIndex].setItemType((ItemType)(uint8_t)myHero.getInventory(inventory_selection));
-            items[itemIndex].setX(myHero.getX());
-            items[itemIndex].setY(myHero.getY());
-
-            myHero.setInventory(inventory_selection, ItemType::None);
-            inventory_action = INVENTORY_ACTION_USE;
-            gameState = GameState::InventorySelect;
-
-          }
+          myHero.setInventory(inventory_selection, ItemType::None);
+          inventory_action = INVENTORY_ACTION_USE;
+          gameState = GameState::InventorySelect;
+          
 
         }
 

@@ -116,6 +116,7 @@ uint8_t loadItems(const uint8_t *level, Item * items, uint8_t idx, uint8_t max) 
 }
 
 
+
 /* -----------------------------------------------------------------------------------------------------------------------------
  *  Initialise Level - load enemies.
  *
@@ -127,6 +128,18 @@ uint8_t loadItems(const uint8_t *level, Item * items, uint8_t idx, uint8_t max) 
  */
 uint8_t loadEnemies(const uint8_t * level, Enemy * enemies, uint8_t idx, uint8_t max) {
 
+  struct StatSet { uint8_t hp, ap, xp; bool moving; };
+
+  static const StatSet loadEnemiesStats[] PROGMEM {
+    { ENEMY_OCCULAR_HP, ENEMY_OCCULAR_AP, ENEMY_OCCULAR_XP, ENEMY_OCCULAR_MV },
+    { ENEMY_SKELETON_HP, ENEMY_SKELETON_AP, ENEMY_SKELETON_XP, ENEMY_SKELETON_MV },
+    { ENEMY_SPARKAT_HP, ENEMY_SPARKAT_AP, ENEMY_SPARKAT_XP, ENEMY_SPARKAT_MV },
+    { ENEMY_WRAITH_HP, ENEMY_WRAITH_AP, ENEMY_WRAITH_XP,  ENEMY_WRAITH_MV },
+    { ENEMY_DRAGON_HP, ENEMY_DRAGON_AP, ENEMY_DRAGON_XP, ENEMY_DRAGON_MV },
+    { ENEMY_RAT_HP, ENEMY_RAT_AP, ENEMY_RAT_XP, ENEMY_RAT_MV, },
+    { ENEMY_SLIME_HP, ENEMY_SLIME_AP, ENEMY_SLIME_XP, ENEMY_SLIME_MV }
+  };
+
   uint8_t numberOfEnemies = pgm_read_byte(&level[idx++]);
 
   for (uint8_t i = 0; i < max; ++i) {
@@ -135,24 +148,16 @@ uint8_t loadEnemies(const uint8_t * level, Enemy * enemies, uint8_t idx, uint8_t
 
     if (enemies[i].getEnabled()) {
 
-      EnemyType enemyType = (EnemyType)pgm_read_byte(&level[idx++]);
+      const EnemyType enemyType = (EnemyType)pgm_read_byte(&level[idx++]);
 
       enemies[i].setEnemyType(enemyType);
       enemies[i].setX(pgm_read_byte(&level[idx++]));
       enemies[i].setY(pgm_read_byte(&level[idx++]));
 
-      uint8_t hp = 0;
-      uint8_t ap = 0;
-      uint8_t xp = 0;
-      boolean moving = false;
-
-      if (enemyType == EnemyType::Occular)        { hp = ENEMY_OCCULAR_HP; ap = ENEMY_OCCULAR_AP; xp = ENEMY_OCCULAR_XP; moving = ENEMY_OCCULAR_MV;  }
-      else if (enemyType == EnemyType::Skeleton)  { hp = ENEMY_SKELETON_HP; ap = ENEMY_SKELETON_AP; xp = ENEMY_SKELETON_XP; moving = ENEMY_SKELETON_MV;  }
-      else if (enemyType == EnemyType::Sparkat)   { hp = ENEMY_SPARKAT_HP; ap = ENEMY_SPARKAT_AP; xp = ENEMY_SPARKAT_XP; moving = ENEMY_SPARKAT_MV;  }
-      else if (enemyType == EnemyType::Wraith)    { hp = ENEMY_WRAITH_HP; ap = ENEMY_WRAITH_AP; xp = ENEMY_WRAITH_XP; moving = ENEMY_WRAITH_MV;  }
-      else if (enemyType == EnemyType::Dragon)    { hp = ENEMY_DRAGON_HP; ap = ENEMY_DRAGON_AP; xp = ENEMY_DRAGON_XP; moving = ENEMY_DRAGON_MV;  }
-      else if (enemyType == EnemyType::Rat)       { hp = ENEMY_RAT_HP; ap = ENEMY_RAT_AP; xp = ENEMY_RAT_XP; moving = ENEMY_RAT_MV; }
-      else if (enemyType == EnemyType::Slime)     { hp = ENEMY_SLIME_HP; ap = ENEMY_SLIME_AP; xp = ENEMY_SLIME_XP; moving = ENEMY_SLIME_MV; }
+      const uint8_t hp = pgm_read_byte(&loadEnemiesStats[static_cast<uint8_t>(enemyType)].hp);
+      const uint8_t ap = pgm_read_byte(&loadEnemiesStats[static_cast<uint8_t>(enemyType)].ap);
+      const uint8_t xp = pgm_read_byte(&loadEnemiesStats[static_cast<uint8_t>(enemyType)].xp);
+      const bool moving = pgm_read_byte(&loadEnemiesStats[static_cast<uint8_t>(enemyType)].moving) != 0;
 
       enemies[i].setHitPoints(hp);
       enemies[i].setHitPointsMax(hp);
