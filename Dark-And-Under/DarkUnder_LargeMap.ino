@@ -1,5 +1,5 @@
 #ifdef USE_LARGE_MAP
-#include "src/Arduboy/Arduboy2.h"
+#include <Arduboy2.h>
 
 /* -----------------------------------------------------------------------------------------------------------------------------
  *  Display Large Map.

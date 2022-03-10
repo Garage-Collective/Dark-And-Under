@@ -1,4 +1,4 @@
-#include "../Arduboy/Arduboy2.h"
+#include <Arduboy2.h>
 #include "Player.h"
 #include "../../Enums.h"
 #include "../levels/MapData.h"

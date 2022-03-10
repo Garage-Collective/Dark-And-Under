@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../Arduboy/Arduboy2.h"
+#include <Arduboy2.h>
 #include "BaseController.h"
 #include "../../Enums.h"
 #include "../levels/Level.h"
