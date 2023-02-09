@@ -247,6 +247,9 @@ GameState battlePlayerDefends(void) {
   myHero.takeDamage(hpLoss);
   damageEnemy(attackingEnemyIdx, 1);
 
+  if(myHero.isDead())
+    return GameState::Battle_PlayerDies;
+
   return (enemies[attackingEnemyIdx].getEnabled())
   ? GameState::Battle_PlayerDecides
   : GameState::Battle_EnemyDies;
