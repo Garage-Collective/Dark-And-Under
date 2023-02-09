@@ -143,7 +143,7 @@ GameState battlePlayerDecides(void)
   for(uint8_t i = 0; i < fightButtonsCount; ++i) {
 
     if(fightButtons[i])
-      arduboy.drawCompressed(80 + 11 * i, 44, pgm_read_word(&fight_actions[i]), WHITE);
+      arduboy.drawCompressed(80 + 11 * i, 44, static_cast<const uint8_t *>(pgm_read_ptr(&fight_actions[i])), WHITE);
 
   }
   
