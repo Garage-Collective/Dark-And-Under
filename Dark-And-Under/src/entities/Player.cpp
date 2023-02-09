@@ -5,6 +5,8 @@
 
 Player::Player() : Base() { }
 
+bool Player::isDead() { return (_hitPoints == 0); }
+
 uint8_t Player::getHitPoints()                            { return _hitPoints; }
 uint8_t Player::getDefence()                              { return _defence; }
 uint8_t Player::getAttackPower()                          { return _attackPower; }

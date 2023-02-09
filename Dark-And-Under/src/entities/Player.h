@@ -10,6 +10,8 @@ class Player : public Base {
 
     Player();
 
+    bool isDead();
+
     uint8_t getHitPoints();
     uint8_t getDefence();
     uint8_t getAttackPower();
