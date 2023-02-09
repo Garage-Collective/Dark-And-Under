@@ -96,9 +96,9 @@ GameState battleEnemyAttacks(void) {
   font3x5.print(hpLoss);
   myHero.takeDamage(hpLoss);
 
-  return (myHero.getHitPoints() > 0)
-  ? GameState::Battle_PlayerDecides
-  :  GameState::Battle_PlayerDies;
+  return (myHero.isDead())
+  ? GameState::Battle_PlayerDies
+  : GameState::Battle_PlayerDecides;
 }
 
 GameState battleEnemyDies(void)
