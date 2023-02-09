@@ -94,7 +94,7 @@ GameState battleEnemyAttacks(void) {
   font3x5.print(F(" DAMAGE!"));
   font3x5.setCursor(33, 26);
   font3x5.print(hpLoss);
-  myHero.setHitPoints(myHero.getHitPoints() > hpLoss ? myHero.getHitPoints() - hpLoss : 0);
+  myHero.takeDamage(hpLoss);
 
   return (myHero.getHitPoints() > 0)
   ? GameState::Battle_PlayerDecides
@@ -244,7 +244,7 @@ GameState battlePlayerDefends(void) {
   font3x5.setCursor(17, 35);
   font3x5.print(hpLoss);
 
-  myHero.setHitPoints(myHero.getHitPoints() - hpLoss);
+  myHero.takeDamage(hpLoss);
   damageEnemy(attackingEnemyIdx, 1);
 
   return (enemies[attackingEnemyIdx].getEnabled())
