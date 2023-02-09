@@ -18,6 +18,12 @@ void Player::setAttackPower(const uint8_t value)          { _attackPower = value
 void Player::setExperiencePoints(const uint8_t value)     { _experiencePoints = value; }
 void Player::setDirection(const Direction value)          { _direction = value; }
 
+void Player::takeDamage(uint8_t amount) {
+
+  _hitPoints = (amount < _hitPoints) ? (_hitPoints - amount) : 0;
+
+}
+
 void Player::setInventory(const int8_t slot, const ItemType item) { 
 
   _inventory[slot] = item; 
