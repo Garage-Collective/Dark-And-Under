@@ -94,11 +94,11 @@ GameState battleEnemyAttacks(void) {
   font3x5.print(F(" DAMAGE!"));
   font3x5.setCursor(33, 26);
   font3x5.print(hpLoss);
-  myHero.setHitPoints(myHero.getHitPoints() > hpLoss ? myHero.getHitPoints() - hpLoss : 0);
+  myHero.takeDamage(hpLoss);
 
-  return (myHero.getHitPoints() > 0)
-  ? GameState::Battle_PlayerDecides
-  :  GameState::Battle_PlayerDies;
+  return (myHero.isDead())
+  ? GameState::Battle_PlayerDies
+  : GameState::Battle_PlayerDecides;
 }
 
 GameState battleEnemyDies(void)
@@ -143,7 +143,7 @@ GameState battlePlayerDecides(void)
   for(uint8_t i = 0; i < fightButtonsCount; ++i) {
 
     if(fightButtons[i])
-      arduboy.drawCompressed(80 + 11 * i, 44, pgm_read_word(&fight_actions[i]), WHITE);
+      arduboy.drawCompressed(80 + 11 * i, 44, static_cast<const uint8_t *>(pgm_read_ptr(&fight_actions[i])), WHITE);
 
   }
   
@@ -244,8 +244,11 @@ GameState battlePlayerDefends(void) {
   font3x5.setCursor(17, 35);
   font3x5.print(hpLoss);
 
-  myHero.setHitPoints(myHero.getHitPoints() - hpLoss);
+  myHero.takeDamage(hpLoss);
   damageEnemy(attackingEnemyIdx, 1);
+
+  if(myHero.isDead())
+    return GameState::Battle_PlayerDies;
 
   return (enemies[attackingEnemyIdx].getEnabled())
   ? GameState::Battle_PlayerDecides

@@ -5,6 +5,8 @@
 
 Player::Player() : Base() { }
 
+bool Player::isDead() { return (_hitPoints == 0); }
+
 uint8_t Player::getHitPoints()                            { return _hitPoints; }
 uint8_t Player::getDefence()                              { return _defence; }
 uint8_t Player::getAttackPower()                          { return _attackPower; }
@@ -17,6 +19,12 @@ void Player::setDefence(const uint8_t value)              { _defence = value; }
 void Player::setAttackPower(const uint8_t value)          { _attackPower = value; }
 void Player::setExperiencePoints(const uint8_t value)     { _experiencePoints = value; }
 void Player::setDirection(const Direction value)          { _direction = value; }
+
+void Player::takeDamage(uint8_t amount) {
+
+  _hitPoints = (amount < _hitPoints) ? (_hitPoints - amount) : 0;
+
+}
 
 void Player::setInventory(const int8_t slot, const ItemType item) { 
 

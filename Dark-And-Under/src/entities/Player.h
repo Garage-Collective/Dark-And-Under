@@ -10,6 +10,8 @@ class Player : public Base {
 
     Player();
 
+    bool isDead();
+
     uint8_t getHitPoints();
     uint8_t getDefence();
     uint8_t getAttackPower();
@@ -28,6 +30,8 @@ class Player : public Base {
     
     void setInventory(const int8_t slot, const ItemType item);   
     void setDirection(const Direction value);
+
+    void takeDamage(uint8_t amount);
      
   private:
 
